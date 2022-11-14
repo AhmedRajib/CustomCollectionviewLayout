@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="178" height="131"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="QVg-QE-eMS">
-                                <rect key="frame" x="0.0" y="0.0" width="178" height="131"/>
+                                <rect key="frame" x="8" y="8" width="162" height="115"/>
                                 <color key="backgroundColor" red="0.6111883521" green="0.1526447833" blue="0.69128650430000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="f5H-SA-nwe">
                                     <size key="itemSize" width="128" height="128"/>
@@ -33,10 +33,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemPurpleColor"/>
                         <constraints>
-                            <constraint firstItem="QVg-QE-eMS" firstAttribute="leading" secondItem="kPr-fm-van" secondAttribute="leading" id="Bke-AE-fO3"/>
-                            <constraint firstAttribute="trailing" secondItem="QVg-QE-eMS" secondAttribute="trailing" id="R0g-mG-6jo"/>
-                            <constraint firstItem="QVg-QE-eMS" firstAttribute="top" secondItem="kPr-fm-van" secondAttribute="top" id="lux-yW-YO7"/>
-                            <constraint firstAttribute="bottom" secondItem="QVg-QE-eMS" secondAttribute="bottom" id="t8t-Kb-csU"/>
+                            <constraint firstItem="QVg-QE-eMS" firstAttribute="leading" secondItem="kPr-fm-van" secondAttribute="leading" constant="8" id="Bke-AE-fO3"/>
+                            <constraint firstAttribute="trailing" secondItem="QVg-QE-eMS" secondAttribute="trailing" constant="8" id="R0g-mG-6jo"/>
+                            <constraint firstItem="QVg-QE-eMS" firstAttribute="top" secondItem="kPr-fm-van" secondAttribute="top" constant="8" id="lux-yW-YO7"/>
+                            <constraint firstAttribute="bottom" secondItem="QVg-QE-eMS" secondAttribute="bottom" constant="8" id="t8t-Kb-csU"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -49,6 +49,9 @@
                 <constraint firstItem="kPr-fm-van" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="gxb-q0-FhD"/>
             </constraints>
             <size key="customSize" width="178" height="131"/>
+            <connections>
+                <outlet property="collectionview" destination="QVg-QE-eMS" id="Nvj-OE-zMV"/>
+            </connections>
             <point key="canvasLocation" x="227.48091603053433" y="17.253521126760564"/>
         </collectionViewCell>
     </objects>

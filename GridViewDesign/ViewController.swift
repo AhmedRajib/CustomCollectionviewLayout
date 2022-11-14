@@ -14,28 +14,72 @@ class ViewController: UIViewController {
     
     
      // MARK: - Variable Declarations
-    let mainArray = [1,1,1,1,8,4,4,4,8]
+    let mainArray = [1,4,4,8,1,1,1]
     
     var subArray: [Int] = []
     var separetedArray:[Int] = []
     let spacing:CGFloat = 10
-
+    
+    var checkTempArrayIsNotEmpty = false
+    var tempArray:[Int] = []
+    var dynamicArray:[[Int]] = [[]]
+    var isFirstTimeDeleted: Bool = false
+    var storeDeletedIndex: [Int] = []
+    var multiCellIsAlreadyShow = false
+    
+    let columnLayout = FlowLayout(
+            minimumInteritemSpacing: 10,
+            minimumLineSpacing: 10,
+            sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        )
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         separetedArray = mainArray
-        
-        for item in mainArray {
+        separetedArray.append(0)
+        for (index,item) in separetedArray.enumerated() {
             if item == 1 {
-                subArray.append(item)
-                separetedArray.remove(at: item)
+                // MARK: - Get All 1 value from MainArray and Create an Array
+                debugPrint("valu ", item)
+                checkTempArrayIsNotEmpty = true
+                tempArray.append(item)
+                separetedArray[index] = 0
+            }else {
+                if checkTempArrayIsNotEmpty { // MARK: - Check tempArray is empty? IF empty then ignor or not empty Then assignInto dynamicArray as an Array
+                    dynamicArray.append(tempArray)
+                    tempArray.removeAll()
+                    if dynamicArray[0] == [] {
+                        dynamicArray.remove(at: 0)
+                    }
+                    checkTempArrayIsNotEmpty = false
+                }
             }
         }
         
+        separetedArray.removeLast()
+        debugPrint("SUb array ", mainArray, "  se ", separetedArray,"dynamic Array ", dynamicArray )
+        for (index,value) in separetedArray.enumerated() {
+//            if !isFirstTimeDeleted {
+//                storeDeletedIndex.append(index)
+//            }else {
+//
+//            }
+            if value == 0 {
+                if !isFirstTimeDeleted {
+                    isFirstTimeDeleted = true
+                }else {
+                    storeDeletedIndex.append(index)
+                }
+            }else { // MARK: - This is not 0
+                isFirstTimeDeleted = false
+            }
+        }
         
-        debugPrint("SUb array ", mainArray, "  se ", separetedArray )
-        
+//        for (index,_) in storeDeletedIndex.enumerated() {
+//            separetedArray.remove(at: index)
+//        }
+        debugPrint("Final array ",separetedArray)
         setupUI()
     }
 
@@ -48,12 +92,7 @@ class ViewController: UIViewController {
         collectionview.delegate = self
         collectionview.dataSource = self
         
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-        
-        layout.minimumLineSpacing = spacing
-        layout.minimumInteritemSpacing = spacing
-        self.collectionview.collectionViewLayout = layout
+        self.collectionview.collectionViewLayout = columnLayout
         
         
     }
@@ -68,16 +107,25 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if separetedArray[indexPath.row] == 4 {
+            multiCellIsAlreadyShow = false
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediumCell", for: indexPath) as? MediumCell
             return cell!
         }else if separetedArray[indexPath.row] == 8 {
+            multiCellIsAlreadyShow = false
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fullWidthItem", for: indexPath) as? fullWidthItem
             
             return cell!
         }else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MultipleCell", for: indexPath) as? MultipleCell
-            
-            return cell!
+            if !multiCellIsAlreadyShow {
+                
+                cell?.totalCell = dynamicArray.first ?? [0]
+                cell?.totalCell.remove(at: 0)
+                multiCellIsAlreadyShow = true
+                return cell!
+            }else {
+                return cell!
+            }
         }
     }
     
