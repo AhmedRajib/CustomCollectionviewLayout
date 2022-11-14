@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     
     
      // MARK: - Variable Declarations
-    let mainArray = [1,4,4,8,1,1,1]
+    let mainArray = [1,1,1,1,4,1,4,8,4]
     
     var subArray: [Int] = []
     var separetedArray:[Int] = []
@@ -26,12 +26,16 @@ class ViewController: UIViewController {
     var isFirstTimeDeleted: Bool = false
     var storeDeletedIndex: [Int] = []
     var multiCellIsAlreadyShow = false
+    var isFoundZero = false
+    var indexOfZeros: [Int] = []
+    var dynamicArraySize = 0
+    var dynamicArrayIndexSize = [Int]()
     
     let columnLayout = FlowLayout(
-            minimumInteritemSpacing: 10,
-            minimumLineSpacing: 10,
-            sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        )
+        minimumInteritemSpacing: 10,
+        minimumLineSpacing: 10,
+        sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    )
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,11 +64,6 @@ class ViewController: UIViewController {
         separetedArray.removeLast()
         debugPrint("SUb array ", mainArray, "  se ", separetedArray,"dynamic Array ", dynamicArray )
         for (index,value) in separetedArray.enumerated() {
-//            if !isFirstTimeDeleted {
-//                storeDeletedIndex.append(index)
-//            }else {
-//
-//            }
             if value == 0 {
                 if !isFirstTimeDeleted {
                     isFirstTimeDeleted = true
@@ -75,11 +74,27 @@ class ViewController: UIViewController {
                 isFirstTimeDeleted = false
             }
         }
+        for (index,removeItem) in separetedArray.enumerated() {
+       
+            if removeItem == 0 {
+             if isFoundZero {
+//                indexOfZeros.append(index) ignore cause last value we found 0
+              }else {
+                  indexOfZeros.append(removeItem)
+//                  dynamicArraySize
+                  
+                  isFoundZero = true
+             }
+            }else {
+                isFoundZero = false
+                indexOfZeros.append(removeItem)
+            }
+        }
         
-//        for (index,_) in storeDeletedIndex.enumerated() {
-//            separetedArray.remove(at: index)
-//        }
-        debugPrint("Final array ",separetedArray)
+
+        separetedArray = indexOfZeros
+        
+        debugPrint("Final array ",indexOfZeros)
         setupUI()
     }
 
@@ -116,11 +131,17 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
             
             return cell!
         }else {
+            debugPrint("It's mee")
+
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MultipleCell", for: indexPath) as? MultipleCell
             if !multiCellIsAlreadyShow {
+
+                cell?.totalCell = dynamicArray[0]
                 
-                cell?.totalCell = dynamicArray.first ?? [0]
-                cell?.totalCell.remove(at: 0)
+                
+//                dynamicArray.remove(at: 0)
+                debugPrint("Index of path ",dynamicArraySize)
+//                cell?.totalCell.remove(at: 0)
                 multiCellIsAlreadyShow = true
                 return cell!
             }else {
