@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42B821622924DA8100815394 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B821612924DA8100815394 /* Extensions.swift */; };
 		42DC3051291FE2B000E98944 /* Flowlayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DC3050291FE2B000E98944 /* Flowlayout.swift */; };
 		42DC3055291FE42E00E98944 /* InnerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DC3053291FE42E00E98944 /* InnerCollectionViewCell.swift */; };
 		42DC3056291FE42E00E98944 /* InnerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42DC3054291FE42E00E98944 /* InnerCollectionViewCell.xib */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		42B821612924DA8100815394 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		42DC3050291FE2B000E98944 /* Flowlayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flowlayout.swift; sourceTree = "<group>"; };
 		42DC3053291FE42E00E98944 /* InnerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerCollectionViewCell.swift; sourceTree = "<group>"; };
 		42DC3054291FE42E00E98944 /* InnerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InnerCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -55,6 +57,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42B821602924DA7400815394 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				42B821612924DA8100815394 /* Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		42DC3052291FE40100E98944 /* InnerCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +93,7 @@
 		A0F31A57291D129B00E329DC /* GridViewDesign */ = {
 			isa = PBXGroup;
 			children = (
+				42B821602924DA7400815394 /* Extensions */,
 				A0F31A6C291D143200E329DC /* Cell */,
 				A0F31A58291D129B00E329DC /* AppDelegate.swift */,
 				A0F31A5A291D129B00E329DC /* SceneDelegate.swift */,
@@ -210,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0F31A6F291D152500E329DC /* fullWidthItem.swift in Sources */,
+				42B821622924DA8100815394 /* Extensions.swift in Sources */,
 				A0F31A7A291D1C0700E329DC /* MultipleCell.swift in Sources */,
 				42DC3051291FE2B000E98944 /* Flowlayout.swift in Sources */,
 				42DC3055291FE42E00E98944 /* InnerCollectionViewCell.swift in Sources */,
