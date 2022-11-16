@@ -19,7 +19,7 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dve-Xv-hRO">
                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                     </view>
                 </subviews>
             </view>
@@ -30,12 +30,15 @@
                 <constraint firstItem="Dve-Xv-hRO" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="kmm-sd-D2A"/>
                 <constraint firstAttribute="trailing" secondItem="Dve-Xv-hRO" secondAttribute="trailing" id="zeF-E5-8CS"/>
             </constraints>
+            <connections>
+                <outlet property="backView" destination="Dve-Xv-hRO" id="Jkb-kk-sRY"/>
+            </connections>
             <point key="canvasLocation" x="31" y="21"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

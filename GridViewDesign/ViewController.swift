@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     
     
      // MARK: - Variable Declarations
-    let mainArray = [1,1,1,1,4,1,4,8,4]
+    let mainArray = [1,1,1,1,4,4,8]
     
     var subArray: [Int] = []
     var separetedArray:[Int] = []
@@ -30,6 +30,7 @@ class ViewController: UIViewController {
     var indexOfZeros: [Int] = []
     var dynamicArraySize = 0
     var dynamicArrayIndexSize = [Int]()
+    var multiCellItemValue: [[Int]] = [[]]
     
     let columnLayout = FlowLayout(
         minimumInteritemSpacing: 10,
@@ -74,14 +75,14 @@ class ViewController: UIViewController {
                 isFirstTimeDeleted = false
             }
         }
-        for (index,removeItem) in separetedArray.enumerated() {
+//        dynamicArray = Array(count:separetedArray.count, repeatedValue:Int())
+        for (_,removeItem) in separetedArray.enumerated() {
        
             if removeItem == 0 {
              if isFoundZero {
 //                indexOfZeros.append(index) ignore cause last value we found 0
               }else {
                   indexOfZeros.append(removeItem)
-//                  dynamicArraySize
                   
                   isFoundZero = true
              }
@@ -93,8 +94,17 @@ class ViewController: UIViewController {
         
 
         separetedArray = indexOfZeros
+        multiCellItemValue  = [[Int]] (repeating: [], count: indexOfZeros.count)
+        debugPrint("Multi Cell Design Size ",multiCellItemValue.count, " ii ",indexOfZeros.count)
         
-        debugPrint("Final array ",indexOfZeros)
+        for (index,valye) in separetedArray.enumerated() {
+            if valye == 0 {
+                let firstValue = dynamicArray.first ?? []
+                multiCellItemValue.insert(firstValue, at: index)
+                dynamicArray.remove(at: 0)
+            }
+        }
+        debugPrint("Final array ",separetedArray, "Test ",multiCellItemValue)
         setupUI()
     }
 
@@ -123,20 +133,19 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if separetedArray[indexPath.row] == 4 {
             multiCellIsAlreadyShow = false
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediumCell", for: indexPath) as? MediumCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MediumCell.identifier, for: indexPath) as? MediumCell
             return cell!
         }else if separetedArray[indexPath.row] == 8 {
             multiCellIsAlreadyShow = false
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fullWidthItem", for: indexPath) as? fullWidthItem
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: fullWidthItem.identifier, for: indexPath) as? fullWidthItem
             
             return cell!
         }else {
-            debugPrint("It's mee")
 
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MultipleCell", for: indexPath) as? MultipleCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MultipleCell.identifier, for: indexPath) as? MultipleCell
             if !multiCellIsAlreadyShow {
 
-                cell?.totalCell = dynamicArray[0]
+                cell?.totalCell = multiCellItemValue[indexPath.row]
                 
                 
 //                dynamicArray.remove(at: 0)
@@ -156,7 +165,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let numberOfItemsperRow = 2
-        let spacingbetweencells = 16
+        let spacingbetweencells = 10
         
         debugPrint("Sepated Item ", separetedArray[indexPath.row])
         
@@ -169,8 +178,8 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
             let totalSpacing = (2 * Int(self.spacing)) + ((numberOfItemsperRow - 1) * spacingbetweencells)
             
             if let collection = self.collectionview{
-                let width = (Int(collection.bounds.width - 20) - totalSpacing)/numberOfItemsperRow
-                return CGSize(width: width, height: width)
+                let width = (Int(collection.bounds.width) - totalSpacing )/numberOfItemsperRow
+                return CGSize(width: width , height: width)
             }else{
                 return CGSize(width: 0, height: 0)
             }
